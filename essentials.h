@@ -9,7 +9,6 @@
 #define s(num) Sleep(num*1000)
 
 
-// color codes
 #define green system("color 0a")
 #define cyan system("color 0b")
 #define red system("color 0c")
