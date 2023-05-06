@@ -1,46 +1,10 @@
 
 // Libraries
 #include "essentials.h"
-
-// display dots animation
-void dots(void) { for (int i = 0; i < 5; ++i) { s(1); printf(" .");} }
-
-// login or registration
-int login(void)
-{
-	printf("\t\t\tType 'L' to Login and 'R' to Resister >>> ");
-	char user = getch();
-	if (user == 'L' || user == 'l')
-	{
-		green;
-		printf("L");
-		nl; printf("\t\t\t\t\tYou pressed 'L'");
-		s(2);
-		nl; printf("\t\t\tRedirecting to the LOG IN screen");
-		dots();
-		return 0;
-	}
-	else if (user == 'R' || user == 'r')
-	{
-		cyan;
-		printf("R");
-		nl; printf("\t\t\t\t\tYou pressed 'R'");
-		s(2);
-		nl; printf("\t\t\tRedirecting to the REGISTRATION screen");
-		dots();
-		return 1;
-	}
-	else
-	{
-		red;
-		nl; printf("\rYou pressed the wrong key. Please follow the instructions");
-		nl; system("pause"); system("cls");
-		login();
-	}
-
-
-}
-
+#define nameLength 12
+#define userLimit 50
+char names[userLimit][nameLength]; // array of all names
+char IDS[userLimit][nameLength];
 // Students info
 struct info
 {
@@ -78,16 +42,37 @@ void fileManager(void)
 	// puts(names);
 }
 
+int valid(char userInput[]) // search in the database
+{
+    int flag = 0;
+    for(int j=0; j<=userLimit; j++)
+    {
+        if(flag == 0)
+        {
+            if(strcmp(IDS[j],userInput) == 1 && strlen(IDS[j]) == strlen(userInput))
+            {
+                flag = 1;
+                break;
+            }
+        }
+    }
+    return flag;
+}
+
 void log_in(void)
 {
+    p("Enter the ID >>> ");
+    char userInput[nameLength];
+    scanf("%s",userInput);
+    int flag = valid(userInput);
+    if (flag) p("Found");
+    else p("Not found");
 
 }
 
-void files_directory(void)
+void files_directory(void) // extract the ids from the created files
 {
     #include <dirent.h>
-    int nameLength = 10;
-    int names[50][nameLength]; // array of all names
     int nameID = 0;
     DIR *d;
     struct dirent *dir;
@@ -99,7 +84,7 @@ void files_directory(void)
             //printf("%s\n", dir->d_name);
             char temp[nameLength];
             int start = 0;
-            if (strlen(dir->d_name) > 3)
+            if (strlen(dir->d_name) > 9)
             {
                 while(dir->d_name[start]!='.') // exttrat the ids till '.txt'
                 {
@@ -112,7 +97,16 @@ void files_directory(void)
         }
         closedir(d);
     }
-    for(int i=0;i<4;i++) printf("%s\n",names[i]);
+
+    int tempArray = 0;
+    for(int i=0; i<=userLimit; i++)
+    {
+        if(strlen(names[i])>=8)
+        {
+            strcpy(IDS[tempArray],names[i]);
+            tempArray++;
+        }
+    }
 }
 
 

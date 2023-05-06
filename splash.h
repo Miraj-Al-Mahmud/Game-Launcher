@@ -54,8 +54,43 @@ void credits(void)
     s(1); red;
     s(1); green;
     s(1); white;
+}
+
+// login or registration
+int login(void)
+{
+	printf("\t\t\tType 'L' to Login and 'R' to Resister >>> ");
+	char user = getch();
+	if (user == 'L' || user == 'l')
+	{
+		green;
+		printf("L");
+		nl; printf("\t\t\t\t\tYou pressed 'L'");
+		s(2);
+		nl; printf("\t\t\tRedirecting to the LOG IN screen");
+		dots();
+		return 0;
+	}
+	else if (user == 'R' || user == 'r')
+	{
+		cyan;
+		printf("R");
+		nl; printf("\t\t\t\t\tYou pressed 'R'");
+		s(2);
+		nl; printf("\t\t\tRedirecting to the REGISTRATION screen");
+		dots();
+		return 1;
+	}
+	else
+	{
+		red;
+		nl; printf("\rYou pressed the wrong key. Please follow the instructions");
+		nl; system("pause"); system("cls");
+		login();
+	}
 
 }
 
-
+// display dots animation
+void dots(void) { for (int i = 0; i < 5; ++i) { s(1); printf(" .");} }
 
