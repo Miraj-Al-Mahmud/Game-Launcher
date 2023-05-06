@@ -8,7 +8,7 @@ char IDS[userLimit][nameLength];
 char userPassword[20];
 char scores[5][20];
 
-void fileManager(char userInput[])
+void fileManager(char userInput[]) // process the users pass, scores of games
 {
     // Directory of the file
     char textFile[] = ".txt"; // extension for textfile
@@ -30,6 +30,7 @@ void fileManager(char userInput[])
         i++;
     }
     // printf("%d",strlen(pass));
+    validPass(userInput);
 
 }
 
@@ -48,9 +49,20 @@ int validID(char userInput[]) // search in the database
         }
     }
     return flag;
+
 }
 
-int validPass(char userInput[]) {}
+int validPass(char userInput[])
+{
+    p("Enter your password >>> ");
+    char userPass[20];
+    scanf("%s",userPass);
+    int length = strlen(scores[0]);
+    scores[0][length-1] = '\0';
+    if(strcmp(userPass,scores[0])==0) p("matched");
+    else p("Not matched");
+    printf("%s %s -",scores[0], userPass);
+}
 
 void log_in(void)
 {
