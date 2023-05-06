@@ -8,7 +8,6 @@
 #define nl printf("\n")
 #define s(num) Sleep(num*1000)
 
-
 #define green system("color 0a")
 #define cyan system("color 0b")
 #define red system("color 0c")
