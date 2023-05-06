@@ -15,23 +15,23 @@ int main(void)
 {
     system("MODE 100,35"); // column - row
 
-    /*
-    nl;
-    logo(); // the gamepad logo
-    title(); // name of the project
-    credits(); // my damn name
-    nl;
 
+    //nl;
+    //logo(); // the gamepad logo
+    //title(); // name of the project
+    //credits(); // my damn name
+    //nl;
 
+    files_directory();  // retrieve the credentials
 
 	int user = login();
 	(user == 0) ? log_in() : registration();
 
     // all OK !!!
-    */
-    clear;
-    files_directory();
-    log_in();
+
+    //clear;
+
+    //log_in();
 
 
 

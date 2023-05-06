@@ -4,7 +4,7 @@
 #define nameLength 12
 #define userLimit 50
 char names[userLimit][nameLength]; // array of all names
-char IDS[userLimit][nameLength];
+char IDS[userLimit][nameLength]; // final ids
 char userPassword[20];
 char scores[5][20];
 
@@ -31,6 +31,7 @@ void fileManager(char userInput[]) // process the users pass, scores of games
     }
     // printf("%d",strlen(pass));
     validPass(userInput);
+    fclose(fptr);
 
 }
 
@@ -41,7 +42,7 @@ int validID(char userInput[]) // search in the database
     {
         if(flag == 0)
         {
-            if(strcmp(IDS[j],userInput) == 1 && strlen(IDS[j]) == strlen(userInput))
+            if(strcmp(IDS[j],userInput) == 0 && strlen(IDS[j]) == strlen(userInput))
             {
                 flag = 1;
                 break;
@@ -66,6 +67,7 @@ int validPass(char userInput[])
 
 void log_in(void)
 {
+    nl;
     p("Enter the ID >>> ");
     char userInput[nameLength];
     scanf("%s",userInput);
@@ -115,7 +117,52 @@ void files_directory(void) // extract the ids from the created files
 }
 
 
+int same(char a[])
+{
+    for(int i=0; i<=userLimit; i++)
+    {
+        if(strcmp(a,IDS[i])==0)
+        {
+            // matched
+            p("Account already exists !!!");
+            return 1;
+        }
+    }
+    return 0;
+}
+
+
+
 void registration()
 {
+    char credentials[3][20];
+    nl;
+    p("Enter your ID >>> ");
+    scanf("%s",credentials[0]);
 
+    // create for already exists !!!
+    int res = same(credentials[0]); // send it to the function
+    if (res==1) registration();
+    else p("Account Available");
+
+    p("Enter password [ At least 8 characters long ] >>> ");
+    scanf("%s",credentials[1]);
+
+    char u[] = "users/";
+    char t[] = ".txt";
+    strcat(u,credentials[0]);
+    strcat(u,t); // ready for creating by this name
+
+    FILE *regi = fopen(u,"w");
+    fprintf(regi,"%s\n0\n0",credentials[1]); // default data values later can be changed
+    fclose(regi);
+    nl;
+    p("Account created successfully !!!");
 }
+
+
+
+
+
+
+
