@@ -22,10 +22,11 @@ int main(void)
 
 	// fileManager();
 
-
+    // testing
     files_directory();
 	int user = login();
 	(user == 0) ? log_in() : registration();
+
 
 
 	return 0;

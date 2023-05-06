@@ -112,7 +112,7 @@ void files_directory(void)
         }
         closedir(d);
     }
-    for(int i=0;i<3;i++) printf("%s\n",names[i]);
+    for(int i=0;i<4;i++) printf("%s\n",names[i]);
 }
 
 
