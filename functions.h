@@ -31,11 +31,6 @@ void fileManager(char userInput[])
     }
     // printf("%d",strlen(pass));
 
-
-
-
-	// puts(names);
-
 }
 
 int validID(char userInput[]) // search in the database
