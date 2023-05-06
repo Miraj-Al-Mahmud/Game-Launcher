@@ -22,7 +22,7 @@ int main(void)
     credits(); // my damn name
     nl;
 
-	// fileManager();
+
 
 	int user = login();
 	(user == 0) ? log_in() : registration();

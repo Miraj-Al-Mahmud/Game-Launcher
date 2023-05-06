@@ -5,44 +5,40 @@
 #define userLimit 50
 char names[userLimit][nameLength]; // array of all names
 char IDS[userLimit][nameLength];
-// Students info
-struct info
-{
-    int ID;
-    char name[30];
-    int pin;
-    long mobile;
-};
+char userPassword[20];
+char scores[5][20];
 
-void fileManager(void)
+void fileManager(char userInput[])
 {
     // Directory of the file
-    FILE *fptr = fopen("users.txt","r");
+    char textFile[] = ".txt"; // extension for textfile
+    char usersFolder[] = "users/"; // addition to folder
+    strcat(userInput,textFile); // adding text
+    strcat(usersFolder, userInput); // adding folder
+    printf("%s",usersFolder);
 
-    struct info allNames[100];
+    FILE *fptr = fopen(usersFolder,"r");
+    //fgets(pass, 100, fptr);
+    //fscanf(fptr,"%s", pass);
 
-	char names[30];
-	// fgets(names, 100, fptr);
-	// fscanf(fptr, "%s", names);
+    char pass[20];
 	int i = 0;
-	while (fgets(names, 30, fptr) != NULL)
+	while (fgets(pass, 20, fptr) != NULL)
     {
-        // printf("%s",names);
-        printf("%s",names);
-        strcpy(allNames[i].name,names);
+        printf("%s",pass);
+        strcpy(scores[i],pass);
         i++;
     }
+    // printf("%d",strlen(pass));
 
-    for(int j =0; j<100; ++j)
-    {
-        printf(allNames[j].name);
-    }
+
 
 
 	// puts(names);
+
 }
 
-int valid(char userInput[]) // search in the database
+int validID(char userInput[]) // search in the database
 {
     int flag = 0;
     for(int j=0; j<=userLimit; j++)
@@ -59,13 +55,15 @@ int valid(char userInput[]) // search in the database
     return flag;
 }
 
+int validPass(char userInput[]) {}
+
 void log_in(void)
 {
     p("Enter the ID >>> ");
     char userInput[nameLength];
     scanf("%s",userInput);
-    int flag = valid(userInput);
-    if (flag) p("Found");
+    int flag = validID(userInput);
+    if (flag) return fileManager(userInput);
     else p("Not found");
 
 }
