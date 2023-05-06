@@ -4,7 +4,7 @@
 #include<math.h>
 #include<windows.h>
 
-// definitions
+// definitions and color codes
 #define nl printf("\n")
 #define s(num) Sleep(num*1000)
 
