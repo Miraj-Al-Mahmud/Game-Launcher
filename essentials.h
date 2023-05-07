@@ -6,7 +6,8 @@
 
 // definitions and color codes
 #define nl printf("\n")
-#define clear system("cls")
+#define space printf("\t\t\t\t")
+#define c system("cls")
 #define s(num) Sleep(num*1000)
 #define p(data) printf(data)
 #define f(start,end) for(int i=start; i<=end; i++)

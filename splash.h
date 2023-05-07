@@ -59,6 +59,7 @@ void credits(void)
 // login or registration
 int login(void)
 {
+    c;
 	printf("\t\t\tType 'L' to Login and 'R' to Resister >>> ");
 	char user = getch();
 	if (user == 'L' || user == 'l')

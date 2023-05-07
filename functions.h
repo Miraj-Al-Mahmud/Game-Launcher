@@ -15,7 +15,7 @@ void fileManager(char userInput[]) // process the users pass, scores of games
     char usersFolder[] = "users/"; // addition to folder
     strcat(userInput,textFile); // adding text
     strcat(usersFolder, userInput); // adding folder
-    printf("%s",usersFolder);
+    // printf("%s",usersFolder);
 
     FILE *fptr = fopen(usersFolder,"r");
     //fgets(pass, 100, fptr);
@@ -25,7 +25,7 @@ void fileManager(char userInput[]) // process the users pass, scores of games
 	int i = 0;
 	while (fgets(pass, 20, fptr) != NULL)
     {
-        printf("%s",pass);
+        // printf("%s",pass);
         strcpy(scores[i],pass);
         i++;
     }
@@ -53,21 +53,45 @@ int validID(char userInput[]) // search in the database
 
 }
 
-int validPass(char userInput[])
+const char* incognito() // for user privacy
 {
-    p("Enter your password >>> ");
-    char userPass[20];
-    scanf("%s",userPass);
-    int length = strlen(scores[0]);
-    scores[0][length-1] = '\0';
-    if(strcmp(userPass,scores[0])==0) p("matched");
-    else p("Not matched");
-    printf("%s %s -",scores[0], userPass);
+    static char temp[20] = ""; // static for global variable
+    while(1)
+    {
+        char pr = getch();
+        char str[2] = {pr,'\0'};
+        if ( pr == '\r' || pr == '\n') break;
+        else
+        {
+            if (pr!='\b') { strcat(temp,str); p("#");} // try not to go into this shit
+            else p("\r");
+        }
+
+    }
+    //nl;printf("%s",temp);
+    //return temp[20];
+    return temp;
 }
 
-void log_in(void)
+
+int validPass(char userInput[])
 {
-    nl;
+    space;cyan;
+    p("Enter your password >>> ");
+    //char userPass[20];
+    const char *userPass = incognito();
+    // scanf("%s",userPass); // incognito
+
+    int length = strlen(scores[0]);
+    scores[0][length-1] = '\0';
+    if(strcmp(userPass,scores[0])==0) { nl; green; space; p("Password Matched !!!");}
+    else { nl; space; red; p("Wrong Password !!!");}
+    // printf("%s %s -",scores[0], userPass);
+}
+
+void log_in(void) // login screen
+{
+    c;nl;nl;nl;space;
     p("Enter the ID >>> ");
     char userInput[nameLength];
     scanf("%s",userInput);
@@ -117,7 +141,7 @@ void files_directory(void) // extract the ids from the created files
 }
 
 
-int same(char a[])
+int same(char a[]) // check if the username already exists
 {
     for(int i=0; i<=userLimit; i++)
     {
@@ -133,8 +157,10 @@ int same(char a[])
 
 
 
-void registration()
+void registration() // user registation screen
 {
+    nl;nl;nl;space;
+    p("USER REGISTRATION");
     char credentials[3][20];
     nl;
     p("Enter your ID >>> ");
