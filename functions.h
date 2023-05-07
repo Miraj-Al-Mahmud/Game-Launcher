@@ -6,7 +6,7 @@
 char names[userLimit][nameLength]; // array of all names
 char IDS[userLimit][nameLength]; // final ids
 char userPassword[20];
-char scores[5][20];
+char scores[5][20]; // login details
 
 void fileManager(char userInput[]) // process the users pass, scores of games
 {
@@ -84,7 +84,7 @@ int validPass(char userInput[])
 
     int length = strlen(scores[0]);
     scores[0][length-1] = '\0';
-    if(strcmp(userPass,scores[0])==0) { nl; green; space; p("Password Matched !!!");}
+    if(strcmp(userPass,scores[0])==0) { nl; green; space; p("Password Matched !!!"); s(2); welcome();}
     else { nl; space; red; p("Wrong Password !!!");}
     // printf("%s %s -",scores[0], userPass);
 }

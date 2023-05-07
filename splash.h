@@ -95,3 +95,25 @@ int login(void)
 // display dots animation
 void dots(void) { for (int i = 0; i < 5; ++i) { s(1); printf(" .");} }
 
+void welcome()
+{
+    c; s(2);
+    nl;nl;nl;nl;nl;nl;nl;
+    p("\t\t\t");
+    p(" W");s(1);cyan;
+    p(" E");s(1);red;
+    p(" L");s(1);yellow;
+    p(" C");s(1);green;
+    p(" O");s(1);white;
+    p(" M");s(1);cyan;
+    p(" E");s(1);green;
+
+    // scores[0] is the name
+    int i = 0; p("     ");
+    while(scores[0][i]!='\0')
+    {
+        printf(" %c",scores[0][i]);
+        s(.25);
+        i++;
+    }
+}

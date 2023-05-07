@@ -32,6 +32,7 @@ int main(void)
     //clear;
 
     log_in();
+    //welcome();
 
 
 
