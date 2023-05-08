@@ -2,6 +2,7 @@
 
 #include "essentials.h"
 
+
 void title(void)
 {
     s(3);
@@ -116,4 +117,18 @@ void welcome()
         s(.25);
         i++;
     }
+}
+
+
+void strcenter(char str[])
+{
+    // get the column size
+    // get the printable string size
+    // find the difference of columns - printable
+    // divide by 2
+    // then only print the left side of the screen
+    int length = strlen(str);
+    int diff = (column - length) / 2;
+    for(int i=0; i<diff; i++) p(" ");
+    puts(str);
 }

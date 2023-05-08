@@ -3,7 +3,11 @@
 #include<stdio.h>
 #include<math.h>
 #include<windows.h>
+#include <conio.h>
+#include <stdlib.h>
 
+#define row 35
+#define column 100
 // definitions and color codes
 #define nl printf("\n")
 #define space printf("\t\t\t\t")

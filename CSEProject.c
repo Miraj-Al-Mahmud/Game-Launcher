@@ -3,17 +3,27 @@
 #include "essentials.h"
 #include "functions.h"
 #include "splash.h"
+#include "game_screen.h"
+#include "randomizer.h"
 
 // small caps = 97 - 122
 // capital = 65 - 90
 
-// void logo();
-// void dots();
-// int login();
+void screenResolution()
+{
+    char row2[] = {row, '\0'};
+    char column2[] = {column, '\0'};
+    char str1[] = "MODE ";
+    strcat(str1, column2);
+    strcat(str1, ",");
+    strcat(str1, row2);
+    system(str1);
+}
 
 int main(void)
 {
-    system("MODE 100,35"); // column - row
+    
+    screenResolution(); // column - row
 
 
     //nl;
@@ -30,9 +40,13 @@ int main(void)
     // all OK !!!
 
     //clear;
-
-    log_in();
+    //controller();
+    //log_in();
+    
     //welcome();
+    
+    
+    game2();
 
 
 
