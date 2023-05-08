@@ -6,7 +6,9 @@
 char names[userLimit][nameLength]; // array of all names
 char IDS[userLimit][nameLength]; // final ids
 char userPassword[20];
-char scores[5][20]; // login details
+char scores[15][20]; // login details -> first one is the password
+char identity[20]; // userName
+
 
 void fileManager(char userInput[]) // process the users pass, scores of games
 {
@@ -49,6 +51,7 @@ int validID(char userInput[]) // search in the database
             }
         }
     }
+    strcpy(identity, userInput); // copy the username for later use
     return flag;
 
 }
@@ -180,15 +183,11 @@ void registration() // user registation screen
     strcat(u,t); // ready for creating by this name
 
     FILE *regi = fopen(u,"w");
-    fprintf(regi,"%s\n0\n0",credentials[1]); // default data values later can be changed
+    fprintf(regi,"%s\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0",credentials[1]); // default data values later can be changed
     fclose(regi);
     nl;
     p("Account created successfully !!!");
 }
-
-
-
-
 
 
 

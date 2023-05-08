@@ -6,6 +6,24 @@
 #include <conio.h>
 #include <stdlib.h>
 
+
+
+
+#define nameLength 12
+#define userLimit 50
+char names[userLimit][nameLength]; // array of all names
+char IDS[userLimit][nameLength]; // final ids
+char userPassword[20];
+char scores[15][20]; // login details -> first one is the password
+char identity[20]; // userName
+
+
+
+
+
+
+
+
 #define row 35
 #define column 100
 // definitions and color codes

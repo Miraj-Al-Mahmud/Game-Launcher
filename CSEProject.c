@@ -34,8 +34,8 @@ int main(void)
 
     files_directory();  // retrieve the credentials
 
-	//int user = login();
-	//(user == 0) ? log_in() : registration();
+	int user = login();
+	(user == 0) ? log_in() : registration();
 
     // all OK !!!
 
