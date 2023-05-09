@@ -1,7 +1,7 @@
 
 // Libraries
 #include "essentials.h"
-
+static char temp[20] = "";
 
 void fileManager(char userInput[]) // process the users pass, scores of games
 {
@@ -51,7 +51,9 @@ int validID(char userInput[]) // search in the database
 
 const char* incognito() // for user privacy
 {
-    static char temp[20] = ""; // static for global variable
+     // static for global variable
+    
+    strcpy(temp,"");
     while(1)
     {
         char pr = getch();
@@ -80,12 +82,20 @@ int validPass(char userInput[])
 
     int length = strlen(scores[0]);
     scores[0][length-1] = '\0';
-    if(strcmp(userPass,scores[0])==0) { nl; green; space; p("Password Matched !!!"); s(2); welcome();}
-    else { nl; space; red; p("Wrong Password !!!");}
+    if(strcmp(userPass,scores[0])==0)
+        {
+            nl;
+            green;
+            strcenter("Password Matched !!!");
+            s(2);
+            welcome();
+        }
+    else { nl; space; red; p("Wrong Password !!!"); s(2); validPass(userInput);}
     // printf("%s %s -",scores[0], userPass);
+
 }
 
-void log_in(void) // login screen
+void log_in() // login screen
 {
     c;nl;nl;nl;space;
     p("Enter the ID >>> ");
@@ -93,7 +103,7 @@ void log_in(void) // login screen
     scanf("%s",userInput);
     int flag = validID(userInput);
     if (flag) return fileManager(userInput);
-    else p("Not found");
+    else {strcenter("Not found"); log_in();}
 
 }
 

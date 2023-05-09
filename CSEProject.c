@@ -45,6 +45,7 @@ int main(void)
                 int wheel = 0; // how many times played the game
                 while(1)
                 {
+                    c;
                     wheel++;
                     game2(wheel);
                     int v = liked();

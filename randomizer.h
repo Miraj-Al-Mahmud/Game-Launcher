@@ -45,6 +45,18 @@ void ass()
 	
 }
 
+
+void stats() // user statistics
+{
+	nl;
+	printf("Total played = %d times", tempArray[5]); nl;
+	printf("Won = %d times", tempArray[6]); nl;
+	printf("Lost = %d times", tempArray[7]); nl;
+	printf("Win Loss ratio = %d%%",tempArray[8]); nl;
+	printf("Personal best = %d",tempArray[9]); nl;
+}
+
+
 int liked()
 {
 	int ver = 0;
@@ -64,6 +76,8 @@ void game2(int wheel)
 {
 	int flag = 0;
 	rng();
+	if (wheel==1) gather_previous_scores(); // only for the first time
+	stats();
 	int chances = 5;	
 	while (chances>0)
 	{
@@ -71,7 +85,13 @@ void game2(int wheel)
 		printf("Guess the number between 1 - %d ( %d/5 chances remaining ) >>> ",upper_limit,chances);
 		int num; scanf("%d",&num);
 		nl;
-		if (num==main_number) {green; strcenter("Matched. Your'e really GENIUS !!!"); flag = 1; break;}
+		if (num==main_number)
+		{
+			green;
+			strcenter("Matched. Your'e really GENIUS !!!");
+			flag = 1;
+			break;
+		}
 		else 
 		{
 			if(abs(num-main_number)<=2) yellow;
@@ -87,13 +107,12 @@ void game2(int wheel)
 	// format > total played - won - lost - percentage of winning - least number of moves - 5 rules
 	// for(int i=0; i<15; i++) printf("%s",scores[i]);
 	// last 5 ones of scores
-	if (wheel==1) gather_previous_scores(); // only for the first time
 	
 	tempArray[5]++; // total played
 	if (chances>=0 && flag==1) tempArray[6]++; // for winning
 	else tempArray[7]++; // for losing
 	tempArray[8] = (tempArray[6]*100) / tempArray[5];
-	tempArray[9] = 5-chances+1; // no of moves
+	if(6-chances<tempArray[9]) {tempArray[9] = 6-chances;} // no of moves personal best
 	
 	//for(int i=5; i<10; i++) printf("%d",tempArray[i]);
 	
