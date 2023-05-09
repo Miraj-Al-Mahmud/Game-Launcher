@@ -6,6 +6,7 @@
 #include "game_screen.h"
 #include "randomizer.h"
 
+
 // small caps = 97 - 122
 // capital = 65 - 90
 
@@ -24,29 +25,36 @@ int main(void)
 {
     
     screenResolution(); // column - row
-
-
-    //nl;
-    //logo(); // the gamepad logo
-    //title(); // name of the project
-    //credits(); // my damn name
-    //nl;
-
+    nl;
+    logo(); // the gamepad logo
+    title(); // name of the project
+    credits(); // my damn name
+    nl;
     files_directory();  // retrieve the credentials
-
 	int user = login();
 	(user == 0) ? log_in() : registration();
-
-    // all OK !!!
-
-    //clear;
-    //controller();
-    //log_in();
+    c;
     
-    //welcome();
-    
-    
-    game2();
+    int cho = controller();
+    switch(cho)
+    {
+        case 1: break;
+        case 2:
+            {
+                // for number guessing game
+                int wheel = 0; // how many times played the game
+                while(1)
+                {
+                    wheel++;
+                    game2(wheel);
+                    int v = liked();
+                    if (v==1) break;
+                }
+                break;
+            }
+        case 3: exit(0); break;
+    }
+//    game2();
 
 
 

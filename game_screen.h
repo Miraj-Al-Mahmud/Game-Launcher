@@ -49,19 +49,20 @@ void third_screen() // default
 
 
 
-void controller()
+int controller()
 {
-	
+	char inp;
 	first_screen();
 	while(1)
 	{
-		char inp = getch();
+		inp = getch();
 		if (inp=='1') {a = 1; c; first_screen();}
 		else if (inp=='2') {a =2 ;c; second_screen();}
 		else if (inp=='3') {a = 3; c; third_screen();}
-		else if (inp=='\n' || inp=='\r') {printf("You pressed %d",a); break;}
-		
-		
-		
+		else if (inp=='\n' || inp=='\r') {nl; strcenter("Please wait ..."); s(2); break;}
 	}
+	printf("%c\n",inp); // did not understand
+	if (inp=='1') return 1;
+	else if (inp=='2') return 2;
+	else if (inp=='3') return 3;
 }

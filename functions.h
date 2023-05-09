@@ -1,13 +1,6 @@
 
 // Libraries
 #include "essentials.h"
-#define nameLength 12
-#define userLimit 50
-char names[userLimit][nameLength]; // array of all names
-char IDS[userLimit][nameLength]; // final ids
-char userPassword[20];
-char scores[15][20]; // login details -> first one is the password
-char identity[20]; // userName
 
 
 void fileManager(char userInput[]) // process the users pass, scores of games

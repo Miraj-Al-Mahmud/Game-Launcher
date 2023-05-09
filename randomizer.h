@@ -1,8 +1,8 @@
 
 #include "essentials.h"
 
-#define upper_limit 10
 
+#define upper_limit 10
 
 int main_number = -1;
 int tempArray[10] = {0}; // for storing this game's specific scores 1 - 5
@@ -45,10 +45,22 @@ void ass()
 	
 }
 
+int liked()
+{
+	int ver = 0;
+	strcenter("Play again ??? 'Y' / 'N' >>> ");
+	char aa = getch();
+	nl;
+	if (aa=='Y' || aa=='y') strcenter("YES");
+	else if (aa=='N' || aa=='n') { ver = 1; strcenter("NO"); }
+	return ver;
+}
 
 
 
-void game2()
+
+
+void game2(int wheel)
 {
 	int flag = 0;
 	rng();
@@ -75,7 +87,8 @@ void game2()
 	// format > total played - won - lost - percentage of winning - least number of moves - 5 rules
 	// for(int i=0; i<15; i++) printf("%s",scores[i]);
 	// last 5 ones of scores
-	gather_previous_scores();
+	if (wheel==1) gather_previous_scores(); // only for the first time
+	
 	tempArray[5]++; // total played
 	if (chances>=0 && flag==1) tempArray[6]++; // for winning
 	else tempArray[7]++; // for losing
@@ -86,7 +99,6 @@ void game2()
 	
 	
 	ass();
-	
 	
 	
 	
