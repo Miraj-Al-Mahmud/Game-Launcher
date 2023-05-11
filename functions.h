@@ -2,8 +2,21 @@
 // Libraries
 #include "essentials.h"
 static char temp[20] = "";
+int total_registered_users = 0;
 
-void fileManager(char userInput[]) // process the users pass, scores of games
+
+void last_check() // remove the garbage value one last time
+{
+    for(int i=0;i<=total_registered_users;i++)
+    {
+        for(int j=0; j < strlen(IDS[i]); j++)
+        {
+            if(!isdigit(IDS[i][j]) && !isalpha(IDS[i][j])) {IDS[i][j]='\0'; break;}
+        }
+    }
+}
+
+void fileManager(char userInput[]) // process the users pass, scores of games // GENIUS !!!!
 {
     // Directory of the file
     char textFile[] = ".txt"; // extension for textfile
@@ -32,8 +45,9 @@ void fileManager(char userInput[]) // process the users pass, scores of games
 
 int validID(char userInput[]) // search in the database
 {
+    last_check();
     int flag = 0;
-    for(int j=0; j<=userLimit; j++)
+    for(int j=0; j<=total_registered_users; j++)
     {
         if(flag == 0)
         {
@@ -97,13 +111,15 @@ int validPass(char userInput[])
 
 void log_in() // login screen
 {
+    system("MODE 95,18");
     c;nl;nl;nl;space;
     p("Enter the ID >>> ");
     char userInput[nameLength];
     scanf("%s",userInput);
+    nl;
     int flag = validID(userInput);
-    if (flag) return fileManager(userInput);
-    else {strcenter("Not found"); log_in();}
+    if (flag==1) return fileManager(userInput);
+    else {strcenter("Not found"); printf("%s\n",IDS[0]);system("pause");log_in();}
 
 }
 
@@ -140,15 +156,21 @@ void files_directory(void) // extract the ids from the created files
     {
         if(strlen(names[i])>=8)
         {
-            strcpy(IDS[tempArray],names[i]);
+            char cleaner_array[nameLength];
+            for(int k=0; k<nameLength; k++)
+            {
+                if(isalpha(names[i][k]) || isdigit(names[i][k])) cleaner_array[k] = names[i][k];
+                else break;
+            }
+            strcpy(IDS[tempArray],cleaner_array);
+            //printf("%s\n",IDS[tempArray]);
             tempArray++;
         }
     }
-    for (int i = 0; i < nameID; ++i)
-    {
-        printf("%s------\n", IDS[i]);
-    }
-    system("pause");
+    total_registered_users = tempArray;
+    //printf("%d",total_registered_users);
+    //system("pause");
+    
 }
 
 

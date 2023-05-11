@@ -6,18 +6,34 @@
 void title(void)
 {
     s(3);
-    yellow;
+    yellow_black;
     printf("\t\t\t\t+-+-+-+-+ +-+-+-+-+-+-+-+-+\n");
     printf("\t\t\t\t|G|A|M|E| |L|A|U|N|C|H|E|R|\n");
     printf("\t\t\t\t+-+-+-+-+ +-+-+-+-+-+-+-+-+\n");
 
 }
 
+void strcenter(char str[])
+{
+    // get the column size
+    // get the printable string size
+    // find the difference of columns - printable
+    // divide by 2
+    // then only print the left side of the screen
+    int length = strlen(str);
+    int diff = (column - length) / 2;
+    for(int i=0; i<diff; i++) p(" ");
+    puts(str);
+}
+
+
+void scatter() {yellow_red; for (int i = 0; i < 39999; ++i) printf("%d", i);c;}
 
 void logo(void)
 {
+    scatter();
     s(1);
-    purple;
+    white_black;
     printf("\t                     .::----:.              .:----::.                   \n");
     printf("\t                :+#O@@@@@@@@@@@*.        .+@@@@@@@@@@@O#+:              \n");
     printf("\t              -#@@@@@O##*++*#@@@@.      .O@@@#**+*##O@@@@@O-            \n");
@@ -48,24 +64,27 @@ void logo(void)
 
 void credits(void)
 {
-    s(2); white_black;
+    s(2); white_cyan;
+    nl;nl;nl;
     printf("\t\t\t\t         CREATED BY\n");
     s(2); white_blue;
     printf("\t\t\t\t     MIRAJ AL MAHMUD KHAN");
-    s(1); white_green;
-    s(1); white_cyan;
-    s(1); white_green;
+    s(1); white_red;
+    s(1); green_red;
+    s(1); green_pink;
 }
 
 // login or registration
 int login(void)
 {
+    nl;nl;
 	printf("\t\t\tType 'L' to Login and 'R' to Resister >>> ");
 	char user = getch();
+    nl;nl;
 	if (user == 'L' || user == 'l')
 	{
 		green;
-		printf("L");
+		strcenter("L");
 		nl; printf("\t\t\t\t\tYou pressed 'L'");
 		s(2);
 		nl; printf("\t\t\tRedirecting to the LOG IN screen");
@@ -75,7 +94,7 @@ int login(void)
 	else if (user == 'R' || user == 'r')
 	{
 		cyan;
-		printf("R");
+		strcenter("R");
 		nl; printf("\t\t\t\t\tYou pressed 'R'");
 		s(2);
 		nl; printf("\t\t\tRedirecting to the REGISTRATION screen");
@@ -110,24 +129,12 @@ void welcome()
 
     // scores[0] is the name
     int i = 0; p("     ");
-    while(scores[0][i]!='\0')
+    while(identity[i]!='\0')
     {
-        printf(" %c",scores[0][i]);
+        printf(" %c",identity[i]);
         s(.25);
         i++;
     }
 }
 
 
-void strcenter(char str[])
-{
-    // get the column size
-    // get the printable string size
-    // find the difference of columns - printable
-    // divide by 2
-    // then only print the left side of the screen
-    int length = strlen(str);
-    int diff = (column - length) / 2;
-    for(int i=0; i<diff; i++) p(" ");
-    puts(str);
-}

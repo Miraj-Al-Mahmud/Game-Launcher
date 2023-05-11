@@ -1,11 +1,12 @@
 
 // Libraries
-#include<stdio.h>
-#include<math.h>
-#include<windows.h>
+#include <stdio.h>
+#include <math.h>
+#include <windows.h>
 #include <conio.h>
 #include <stdlib.h>
-
+#include <string.h>
+#include <ctype.h>
 
 #define nameLength 30
 #define userLimit 50
@@ -15,10 +16,14 @@ char IDS[userLimit][nameLength]; // final ids
 char userPassword[nameLength];
 char scores[15][nameLength]; // login details -> first one is the password
 char identity[nameLength]; // userName
+char world[userLimit][nameLength]; // all the registered filenames
+char world_credentials[userLimit][11][nameLength]; // 5 for each game
+int world_credentials_converted[userLimit][11]; // 5 for each game
 
 #define row 35
 #define column 100
 
+ 
 // definitions and color codes
 #define nl printf("\n")
 #define space printf("\t\t\t\t")
@@ -48,7 +53,7 @@ char identity[nameLength]; // userName
 #define  yellow_green system("color EA")
 #define  yellow_red system("color EC")
 // red background
-#define  red_green system("color C2")
+#define  red_black system("color C2")
 #define  red_grey system("color C7")
 #define  red_blue system("color C9")
 #define  red_green system("color CA")

@@ -194,6 +194,63 @@ printf("                                       $$$$$$$$\n");
 */
 
 
+struct collector
+{
+    char player_name[nameLength];
+    int g11;
+    int g12;
+    int g13;
+    int g14;
+    int g15;
+    int g21;
+    int g22;
+    int g23;
+    int g24;
+    int g25;
+};
+
+
+void assembler()
+{
+    struct collector array_final[total_registered_users];
+    for (int i = 0; i < total_registered_users; ++i)
+    {
+        strcpy(array_final[i].player_name, IDS[i]); // copy the name
+        array_final[i].g11 = world_credentials_converted[i][0];
+        array_final[i].g12 = world_credentials_converted[i][1];
+        array_final[i].g13 = world_credentials_converted[i][2];
+        array_final[i].g14 = world_credentials_converted[i][3]; // %
+        array_final[i].g15 = world_credentials_converted[i][4];
+        array_final[i].g21 = world_credentials_converted[i][5];
+        array_final[i].g22 = world_credentials_converted[i][6];
+        array_final[i].g23 = world_credentials_converted[i][7];
+        array_final[i].g24 = world_credentials_converted[i][8]; // %
+        array_final[i].g25 = world_credentials_converted[i][9];
+    }
+    calculator(array_final);
+    
+}
+
+
+void calculator(struct collector array_final)
+{
+    /*
+    int expected = 0;
+    char winner[nameLength];
+    for (int i = 0; i < total_registered_users; ++i)
+    {
+        if (array_final[i].g14 > expected)
+        {
+            // copy the name and the percentage
+            expected = array_final[i].g14;
+            strcpy(winner, array_final[i].player_name);
+        }
+    }
+    printf("%s\n",winner );
+    */
+}
+
+
 int welcome_screen_1()
 {
     int handler = 0;
@@ -222,36 +279,61 @@ int welcome_screen_1()
 }
 
 
-char world[userLimit][nameLength]; // all the filenames
-int how_many_users = 0;
-void add_all(char fname[], int counter)
+
+void add_all(char fname[], int counter) // attach the usernames with the files
 {
     char file_name_final[] = "users/";
     strcat(file_name_final,fname);
     strcat(file_name_final,".txt");
     strcpy(world[counter],file_name_final);
-
 }
 
 
-void leaderboard()
+
+void leaderboard()  // only arrange the data 
 {
-    
-    for(int i=0; i< userLimit; i++)
+    for(int i=0; i <= total_registered_users; i++) add_all(IDS[i],i);          
+    for (int i = 0; i < total_registered_users; ++i)
     {
-        char temp_array[nameLength];
-        if(strlen(names[i])>minimum_length)
+        FILE *fptr = fopen(world[i],"r");
+        
+        char pass[50];
+        int j = 0;
+        while (fgets(pass, 50, fptr) != NULL)
         {
-            int s = 0;
-            while(names[i][s] != '\0')
-            {
-                temp_array[s] = names[i][s];
-                s++;
-            }
+            strcpy(world_credentials[i][j],pass);
+            j++;
         }
-        printf("%s\n", temp_array);
     }
-    //for(int i=0; i<= how_many_users; i++) printf("%d %s-\n",i, world[i]);
+    for (int i = 0; i < total_registered_users; ++i)
+    {
+        for (int j = 0; j < 11; ++j) // make the last new line to null chanracter
+            world_credentials[i][j][strlen(world_credentials[i][j])-1]='\0';
+    }
+    /*
+    for (int i = 0; i < total_registered_users; ++i)
+    {
+        for (int j = 0; j < 10; ++j)  printf("%s ->", world_credentials[i][j]);
+        nl;
+    }
+    */
+    for (int i = 0; i < total_registered_users; ++i) // convert to digits
+    {
+        for (int j = 1; j < 11; ++j)
+        {
+            int con = atoi(world_credentials[i][j]);
+            world_credentials_converted[i][j] = con;
+        }
+
+    }
+    /*
+    for (int i = 0; i < total_registered_users; ++i)
+    {
+        printf("%s", IDS[i]);
+        for (int j = 1; j < 11; ++j)  printf("\t%d", world_credentials_converted[i][j]);
+        nl;
+    }
+    */   
 }
 
 void main_game_controller(int wheel) // driver code

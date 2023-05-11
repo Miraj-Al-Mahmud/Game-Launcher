@@ -26,7 +26,9 @@ void screenResolution(int col, int r)
 int main(void)
 {
     
-    screenResolution(90,40); // column - row
+    c;
+    //screenResolution(100,45); // column - row
+    system("MODE 90,45");
     nl;
     logo(); // the gamepad logo
     title(); // name of the project
@@ -74,7 +76,7 @@ int main(void)
     
     //files_directory();
     //leaderboard();    
-    
+    //assembler();    
 
  
 

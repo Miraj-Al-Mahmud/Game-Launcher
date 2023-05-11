@@ -8,7 +8,13 @@
 
 static int a = 0;
 
-void gameTitle() {strcenter("=============== CHOOSE YOUR GAME ==============="); nl;nl;nl;}
+void gameTitle()
+{
+	nl;nl;nl;
+	system("MODE 110,30");
+	strcenter("=============== CHOOSE YOUR GAME ===============");
+	nl;nl;nl;
+}
 
 void first_screen() // default
 {
