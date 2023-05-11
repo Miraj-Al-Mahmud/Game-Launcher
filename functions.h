@@ -90,7 +90,7 @@ int validPass(char userInput[])
             s(2);
             welcome();
         }
-    else { nl; space; red; p("Wrong Password !!!"); s(2); validPass(userInput);}
+    else { nl; space; red; p("Wrong Password !!!"); s(2); log_in();}
     // printf("%s %s -",scores[0], userPass);
 
 }
@@ -144,6 +144,11 @@ void files_directory(void) // extract the ids from the created files
             tempArray++;
         }
     }
+    for (int i = 0; i < nameID; ++i)
+    {
+        printf("%s------\n", IDS[i]);
+    }
+    system("pause");
 }
 
 
@@ -186,7 +191,7 @@ void registration() // user registation screen
     strcat(u,t); // ready for creating by this name
 
     FILE *regi = fopen(u,"w");
-    fprintf(regi,"%s\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0",credentials[1]); // default data values later can be changed
+    fprintf(regi,"%s\n0\n0\n0\n0\n10\n0\n0\n0\n0\n10",credentials[1]); // default data values later can be changed
     fclose(regi);
     nl;
     p("Account created successfully !!!");

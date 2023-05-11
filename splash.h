@@ -48,13 +48,13 @@ void logo(void)
 
 void credits(void)
 {
-    s(2); white;
+    s(2); white_black;
     printf("\t\t\t\t         CREATED BY\n");
-    s(2); cyan;
+    s(2); white_blue;
     printf("\t\t\t\t     MIRAJ AL MAHMUD KHAN");
-    s(1); red;
-    s(1); green;
-    s(1); white;
+    s(1); white_green;
+    s(1); white_cyan;
+    s(1); white_green;
 }
 
 // login or registration

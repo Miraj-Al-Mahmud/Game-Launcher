@@ -5,15 +5,16 @@
 #include "splash.h"
 #include "game_screen.h"
 #include "randomizer.h"
-
+#include "tic_tac_toe.h"
 
 // small caps = 97 - 122
 // capital = 65 - 90
 
-void screenResolution()
+
+void screenResolution(int col, int r)
 {
-    char row2[] = {row, '\0'};
-    char column2[] = {column, '\0'};
+    char row2[] = {r, '\0'};
+    char column2[] = {col, '\0'};
     char str1[] = "MODE ";
     strcat(str1, column2);
     strcat(str1, ",");
@@ -21,10 +22,11 @@ void screenResolution()
     system(str1);
 }
 
+
 int main(void)
 {
     
-    screenResolution(); // column - row
+    screenResolution(90,40); // column - row
     nl;
     logo(); // the gamepad logo
     title(); // name of the project
@@ -35,29 +37,46 @@ int main(void)
 	(user == 0) ? log_in() : registration();
     c;
     
-    int cho = controller();
-    switch(cho)
+    
+    int master_flag = 0;
+    while (master_flag==0)
     {
-        case 1: break;
-        case 2:
+        int cho = controller();
+        int wheel = 0; // how many times played the game
+        if (cho==1)
+        {
+            // or tic tac toe
+            while(1)
             {
-                // for number guessing game
-                int wheel = 0; // how many times played the game
-                while(1)
-                {
-                    c;
-                    wheel++;
-                    game2(wheel);
-                    int v = liked();
-                    if (v==1) break;
-                }
-                break;
+                c;
+                wheel++;
+                main_game_controller(wheel);
+                int v = liked();
+                if (v==1) {c;break;}
             }
-        case 3: exit(0); break;
+            //main_game_controller();
+        }
+        else if (cho==2)
+        {   // for number guessing game
+            while(1)
+            {
+                c;
+                wheel++;
+                game2(wheel);
+                int v = liked();
+                if (v==1) {c;break;}
+            }
+        }
+        else if (cho==3) {break;}
     }
-//    game2();
 
+    
+    
+    //files_directory();
+    //leaderboard();    
+    
 
+ 
 
 
 	return 0;

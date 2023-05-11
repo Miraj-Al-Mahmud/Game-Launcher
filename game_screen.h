@@ -6,7 +6,7 @@
 // Number Guessing Game
 // Exit
 
-int a = 0;
+static int a = 0;
 
 void gameTitle() {strcenter("=============== CHOOSE YOUR GAME ==============="); nl;nl;nl;}
 
@@ -61,8 +61,9 @@ int controller()
 		else if (inp=='3') {a = 3; c; third_screen();}
 		else if (inp=='\n' || inp=='\r') {nl; strcenter("Please wait ..."); s(2); break;}
 	}
-	printf("%c\n",inp); // did not understand
-	if (inp=='1') return 1;
-	else if (inp=='2') return 2;
-	else if (inp=='3') return 3;
+	//printf("%c\n",inp); // did not understand
+	if (a==1) return 1;
+	else if (a==2) return 2;
+	else if (a==3) return 3;
+
 }

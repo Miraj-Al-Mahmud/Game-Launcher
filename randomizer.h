@@ -1,12 +1,9 @@
 
 #include "essentials.h"
-
-
 #define upper_limit 10
 
 int main_number = -1;
-int tempArray[10] = {0}; // for storing this game's specific scores 1 - 5
-
+static int tempArray[10] = {0}; // for storing this game's specific scores 1 - 10
 
 void rng()
 {
@@ -22,7 +19,6 @@ void greetings(int chances)
 	else if (chances == 1) strcenter("Better Luck next time!!!");
 }
 
-
 void gather_previous_scores() // gather scores from the file
 { // atoi -> string to number
 	for(int i=1; i<=10; i++)
@@ -31,6 +27,8 @@ void gather_previous_scores() // gather scores from the file
 		tempArray[i-1] = temp_score;
 	}
 }
+
+
 
 
 void ass()
@@ -46,14 +44,14 @@ void ass()
 }
 
 
-void stats() // user statistics
+void stats(int start) // user statistics
 {
 	nl;
-	printf("Total played = %d times", tempArray[5]); nl;
-	printf("Won = %d times", tempArray[6]); nl;
-	printf("Lost = %d times", tempArray[7]); nl;
-	printf("Win Loss ratio = %d%%",tempArray[8]); nl;
-	printf("Personal best = %d",tempArray[9]); nl;
+	printf("Total played = %d times", tempArray[start]); nl; start++;
+	printf("Won = %d times", tempArray[start]); nl; start++;
+	printf("Lost = %d times", tempArray[start]); nl; start++;
+	printf("Win Loss ratio = %d%%",tempArray[start]); nl; start++;
+	printf("Personal best = %d",tempArray[start]); nl;
 }
 
 
@@ -71,13 +69,13 @@ int liked()
 
 
 
-
 void game2(int wheel)
 {
 	int flag = 0;
 	rng();
 	if (wheel==1) gather_previous_scores(); // only for the first time
-	stats();
+	//gather_previous_scores();
+	stats(5);
 	int chances = 5;	
 	while (chances>0)
 	{
@@ -122,6 +120,9 @@ void game2(int wheel)
 	
 	
 }
+
+
+
 
 
 
