@@ -2,11 +2,34 @@
 
 #include "essentials.h"
 
+int computer = false;
+char square[10] = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
+char backup[10] = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
 
-char square[10] = { 'o', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
-char backup[10] = { 'o', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
-
-
+int ai_rng()
+{
+    srand(time(NULL));
+    int x = (rand() % 9) + 1;  // + 1 for ignoring the 0
+    int flag = false;
+    int i = x;
+    while (i > 0)
+    {
+        if(square[i]=='X' || square[i]=='O') i--;
+        else {flag = true; break;}
+    }
+    if (flag = true) return i;
+    
+    if (flag == false)
+    {
+        while(true)
+        {
+            if(square[i]=='X' || square[i]=='O') x++;
+            else {flag = true; break;}
+        } 
+    }
+    
+    return x;
+}
 
 void add_points(int start, int player, int i, int chances)
 {
@@ -32,10 +55,18 @@ int game1(int wheel)
         counter++;
         board(counter); 
         if (player % 2 == 1) {player=1;}
-        else{player=2;}
-        printf("\n\n\n");
-        printf("Player %d = \t   ", player);
-        scanf("%d", &choice);
+        else { player = 2; }
+        nl;nl;nl;
+        
+        if (computer==true && player==2)
+        {
+            choice = ai_rng();
+        }
+        else
+        {
+            printf("Player %d = \t   ", player);
+            scanf("%d", &choice);
+        }
 
         if (player == 1) {mark='X';}
         else {mark='O';}
@@ -64,8 +95,9 @@ int game1(int wheel)
         }
 
         i = checkwin();
-
         player++;
+        
+        
     } while (i ==  - 1);
 
     board();
@@ -121,6 +153,7 @@ int checkwin() // winning or not ??
 void board(int counter)
 {
     c;
+    system("MODE 110,30");
     printf("\n\n\t\t\t\tTIC TAC TOE\n\n");
 
     if (counter%2==0) system("color 1f");
@@ -150,32 +183,34 @@ void board(int counter)
 
 
 void smiley(player){
-printf("                          $$$$$$$$$$$$$$$$$$$$\n");
-printf("                       $$$$$$$$$$$$$$$$$$$$$$$$$$$\n");
-printf("                    $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$         $$   $$$$$\n");
-printf("    $$$$$$        $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$       $$$$$$$$$$\n");
-printf(" $$ $$$$$$      $$$$$$$$$$    $$$$$$$$$$$$$    $$$$$$$$$$       $$$$$$$$\n");
-printf(" $$$$$$$$$     $$$$$$$$$$      $$$$$$$$$$$      $$$$$$$$$$$    $$$$$$$$\n");
-printf("   $$$$$$$    $$$$$$$$$$$      $$$$$$$$$$$      $$$$$$$$$$$$$$$$$$$$$$$\n");
-printf("   $$$$$$$$$$$$$$$$$$$$$$$    $$$$$$$$$$$$$    $$$$$$$$$$$$$$  $$$$$$\n");
-printf("    $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$     $$$$\n");
-printf("     $$$   $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$     $$$$$\n");
-printf("    $$$$   $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$       $$$$\t\tPLAYER %d WINS\n", --player);
-printf("    $$$    $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ $$$$$$$$$$$$$$$$$\n");
-printf("   $$$$$$$$$$$$$  $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$   $$$$$$$$$$$$$$$$$$\n");
-printf("   $$$$$$$$$$$$$   $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$     $$$$$$$$$$$$\n");
-printf("  $$$$       $$$$    $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$      $$$$\n");
-printf("             $$$$$     $$$$$$$$$$$$$$$$$$$$$$$$$         $$$\n");
-printf("               $$$$          $$$$$$$$$$$$$$$           $$$$\n");
-printf("                $$$$$                                $$$$$\n");
-printf("                 $$$$$$      $$$$$$$$$$$$$$        $$$$$\n");
-printf("                   $$$$$$$$     $$$$$$$$$$$$$   $$$$$$$\n");
-printf("                      $$$$$$$$$$$  $$$$$$$$$$$$$$$$$\n");
-printf("                         $$$$$$$$$$$$$$$$$$$$$$\n");
-printf("                                 $$$$$$$$$$$$$$$\n");
-printf("                                     $$$$$$$$$$$$\n");
-printf("                                      $$$$$$$$$$$\n");
-printf("                                       $$$$$$$$\n");
+    system("MODE 120,35");
+    nl;nl;
+    printf("                          $$$$$$$$$$$$$$$$$$$$\n");
+    printf("                       $$$$$$$$$$$$$$$$$$$$$$$$$$$\n");
+    printf("                    $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$         $$   $$$$$\n");
+    printf("    $$$$$$        $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$       $$$$$$$$$$\n");
+    printf(" $$ $$$$$$      $$$$$$$$$$    $$$$$$$$$$$$$    $$$$$$$$$$       $$$$$$$$\n");
+    printf(" $$$$$$$$$     $$$$$$$$$$      $$$$$$$$$$$      $$$$$$$$$$$    $$$$$$$$\n");
+    printf("   $$$$$$$    $$$$$$$$$$$      $$$$$$$$$$$      $$$$$$$$$$$$$$$$$$$$$$$\n");
+    printf("   $$$$$$$$$$$$$$$$$$$$$$$    $$$$$$$$$$$$$    $$$$$$$$$$$$$$  $$$$$$\n");
+    printf("    $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$     $$$$\n");
+    printf("     $$$   $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$     $$$$$\n");
+    printf("    $$$$   $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$       $$$$\t\tPLAYER %d WINS\n", --player);
+    printf("    $$$    $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ $$$$$$$$$$$$$$$$$\n");
+    printf("   $$$$$$$$$$$$$  $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$   $$$$$$$$$$$$$$$$$$\n");
+    printf("   $$$$$$$$$$$$$   $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$     $$$$$$$$$$$$\n");
+    printf("  $$$$       $$$$    $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$      $$$$\n");
+    printf("             $$$$$     $$$$$$$$$$$$$$$$$$$$$$$$$         $$$\n");
+    printf("               $$$$          $$$$$$$$$$$$$$$           $$$$\n");
+    printf("                $$$$$                                $$$$$\n");
+    printf("                 $$$$$$      $$$$$$$$$$$$$$        $$$$$\n");
+    printf("                   $$$$$$$$     $$$$$$$$$$$$$   $$$$$$$\n");
+    printf("                      $$$$$$$$$$$  $$$$$$$$$$$$$$$$$\n");
+    printf("                         $$$$$$$$$$$$$$$$$$$$$$\n");
+    printf("                                 $$$$$$$$$$$$$$$\n");
+    printf("                                     $$$$$$$$$$$$\n");
+    printf("                                      $$$$$$$$$$$\n");
+    printf("                                       $$$$$$$$\n");
 
 }
 
@@ -209,51 +244,125 @@ struct collector
     int g25;
 };
 
-
-void assembler()
+int present(int array[], int number) // check for availability
 {
+    int flag = false;
+    for (int i = 0; i < total_registered_users; ++i) {   if(array[i] == number) {flag = true; break;}  }
+    return flag;
+}
+
+
+void assembler(int played)
+{
+    system("MODE 110,20");
+    nl;nl;nl;
     struct collector array_final[total_registered_users];
     for (int i = 0; i < total_registered_users; ++i)
     {
         strcpy(array_final[i].player_name, IDS[i]); // copy the name
-        array_final[i].g11 = world_credentials_converted[i][0];
-        array_final[i].g12 = world_credentials_converted[i][1];
-        array_final[i].g13 = world_credentials_converted[i][2];
-        array_final[i].g14 = world_credentials_converted[i][3]; // %
-        array_final[i].g15 = world_credentials_converted[i][4];
-        array_final[i].g21 = world_credentials_converted[i][5];
-        array_final[i].g22 = world_credentials_converted[i][6];
-        array_final[i].g23 = world_credentials_converted[i][7];
-        array_final[i].g24 = world_credentials_converted[i][8]; // %
-        array_final[i].g25 = world_credentials_converted[i][9];
+        array_final[i].g11 = world_credentials_converted[i][1];
+        array_final[i].g12 = world_credentials_converted[i][2];
+        array_final[i].g13 = world_credentials_converted[i][3];
+        array_final[i].g14 = world_credentials_converted[i][4]; // %
+        array_final[i].g15 = world_credentials_converted[i][5];
+        array_final[i].g21 = world_credentials_converted[i][6];
+        array_final[i].g22 = world_credentials_converted[i][7];
+        array_final[i].g23 = world_credentials_converted[i][8];
+        array_final[i].g24 = world_credentials_converted[i][9]; // %
+        array_final[i].g25 = world_credentials_converted[i][10];
     }
-    calculator(array_final);
     
-}
-
-
-void calculator(struct collector array_final)
-{
-    /*
-    int expected = 0;
-    char winner[nameLength];
-    for (int i = 0; i < total_registered_users; ++i)
+    // display data of all users
+    space;
+    printf("USERNAME\tPLAYED\tWIN\tLOSS\t%%\tMOVES\n");
+    if (played==1)
     {
-        if (array_final[i].g14 > expected)
+        for (int i = 0; i < total_registered_users; ++i)
         {
-            // copy the name and the percentage
-            expected = array_final[i].g14;
-            strcpy(winner, array_final[i].player_name);
+            space;
+            printf("%s\t%d\t%d\t%d\t%d\t%d\n", \
+            array_final[i].player_name, array_final[i].g11,array_final[i].g12,array_final[i].g13,array_final[i].g14,array_final[i].g15);
         }
     }
-    printf("%s\n",winner );
+    else if (played==2)
+    {
+        for (int i = 0; i < total_registered_users; ++i)
+        {
+            space;
+            printf("%s\t%d\t%d\t%d\t%d\t%d\n", \
+            array_final[i].player_name, array_final[i].g21,array_final[i].g22,array_final[i].g23,array_final[i].g24,array_final[i].g25);
+        }
+    }
+    /*
+    // find the greatest
+    int expected = 0;
+    int ice_breaker = false;
+    char winner[nameLength] = "";
+    
+    int index_array[total_registered_users];
+    int sorted_array[total_registered_users];
+    char winner_array_name[total_registered_users][nameLength];
+    int winner_array_score[total_registered_users];
+    int positions[total_registered_users];
+    
+    
+    // gather only the name and percentage to the secondary array
+    for (int i = 0; i < total_registered_users; ++i)
+    {
+        strcpy(winner_array_name[i], array_final[i].player_name);
+        winner_array_score[i] = array_final[i].g14;
+    }
+    
+    
+    
+    
+
+    
+    int index = 0;    
+    int temp_high = 0;
+    int j = 0;
+    while (j < total_registered_users)
+    {
+        for (int i = 0; i < total_registered_users; ++i)
+        {
+            int pr = present(sorted_array, winner_array_score[i]);
+            //printf("%d\n", pr);
+            if (temp_high < winner_array_score && pr == 0) {temp_high = winner_array_score[i]; index = i;}    
+        }
+        sorted_array[j] = temp_high;
+        index_array[j] = index;
+        j++;
+    }
+    
+    // display
+    for (int i = 0; i < total_registered_users; ++i) printf("%s %d\n", winner_array_name[i],winner_array_score[i]);
+    
+    
+    // finall show the results
+    for (int i = 0; i < total_registered_users; ++i)
+    {
+        for (int j = 0; j < total_registered_users; ++j)
+        {
+            if (strcmp(array_final[j].player_name,winner_array_name[index_array[i]])==0)
+            {
+                printf("%s\t%d\t%d\t%d\t%d\t%d\n",array_final[j].player_name,array_final[j].g11,array_final[j].g12,array_final[j].g13,array_final[j].g14,array_final[j].g15);
+                break;
+            }
+            //else printf("Not found\n");
+        }
+    }
     */
+
 }
+
+
+
 
 
 int welcome_screen_1()
 {
     int handler = 0;
+    c;
     nl;nl;nl;
     strcenter("1. Play against A.I.");
     strcenter("2. Play against another user");
@@ -327,7 +436,7 @@ void leaderboard()  // only arrange the data
 
     }
     /*
-    for (int i = 0; i < total_registered_users; ++i)
+    for (int i = 0; i < total_registered_users; ++i) // display all the infos
     {
         printf("%s", IDS[i]);
         for (int j = 1; j < 11; ++j)  printf("\t%d", world_credentials_converted[i][j]);
@@ -342,7 +451,10 @@ void main_game_controller(int wheel) // driver code
     if (wheel==1) gather_previous_scores(); // only for the first time
     //gather_previous_scores();
     stats(0);
-    if (x==1) {}
+    if (x==1) {computer = true; game1(wheel);}
     else if (x==2) game1(wheel);
     
 }
+
+
+void hall_of_fame(int played) { leaderboard(); assembler(played); }

@@ -22,7 +22,8 @@ int world_credentials_converted[userLimit][11]; // 5 for each game
 
 #define row 35
 #define column 100
-
+#define true 1
+#define false 0
  
 // definitions and color codes
 #define nl printf("\n")

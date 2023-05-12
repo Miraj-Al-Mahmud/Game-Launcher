@@ -71,6 +71,7 @@ int liked()
 
 void game2(int wheel)
 {
+	system("MODE 110,30");
 	int flag = 0;
 	rng();
 	if (wheel==1) gather_previous_scores(); // only for the first time

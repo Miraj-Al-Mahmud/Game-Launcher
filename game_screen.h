@@ -1,6 +1,6 @@
 
 #include "essentials.h"
-#define adjustment p("\n\n\n\n\n")
+
 // options are ->
 // Tic - Tac - Toe
 // Number Guessing Game
@@ -10,15 +10,14 @@ static int a = 0;
 
 void gameTitle()
 {
+	system("MODE 110,20");
 	nl;nl;nl;
-	system("MODE 110,30");
 	strcenter("=============== CHOOSE YOUR GAME ===============");
 	nl;nl;nl;
 }
 
 void first_screen() // default
 {
-	adjustment;
 	gameTitle();
 	cyan;	
 	strcenter(">>>          1. TIC TAC TOE          <<<"); 
@@ -30,7 +29,6 @@ void first_screen() // default
 
 void second_screen() // default
 {
-	adjustment;
 	gameTitle();
 	green;	
 	strcenter("1. TIC TAC TOE"); 
@@ -43,7 +41,6 @@ void second_screen() // default
 
 void third_screen() // default
 {
-	adjustment;
 	gameTitle();
 	red;
 	strcenter("1. TIC TAC TOE"); 

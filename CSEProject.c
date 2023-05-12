@@ -37,12 +37,13 @@ int main(void)
     files_directory();  // retrieve the credentials
 	int user = login();
 	(user == 0) ? log_in() : registration();
-    c;
     
     
     int master_flag = 0;
+    int last_played = -1;
     while (master_flag==0)
     {
+        fflush(stdout);
         int cho = controller();
         int wheel = 0; // how many times played the game
         if (cho==1)
@@ -50,9 +51,12 @@ int main(void)
             // or tic tac toe
             while(1)
             {
-                c;
                 wheel++;
                 main_game_controller(wheel);
+                c;nl;nl;nl;
+                last_played = 1;
+                hall_of_fame(last_played);
+                nl;nl;nl;
                 int v = liked();
                 if (v==1) {c;break;}
             }
@@ -62,21 +66,22 @@ int main(void)
         {   // for number guessing game
             while(1)
             {
-                c;
                 wheel++;
                 game2(wheel);
+                c;nl;nl;nl;
+                last_played = 2;
+                hall_of_fame(last_played);
+                nl;nl;nl;
                 int v = liked();
                 if (v==1) {c;break;}
             }
         }
         else if (cho==3) {break;}
+
     }
 
     
-    
-    //files_directory();
-    //leaderboard();    
-    //assembler();    
+     
 
  
 

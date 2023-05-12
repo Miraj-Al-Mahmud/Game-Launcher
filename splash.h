@@ -26,7 +26,6 @@ void strcenter(char str[])
     puts(str);
 }
 
-
 void scatter() {yellow_red; for (int i = 0; i < 39999; ++i) printf("%d", i);c;}
 
 void logo(void)
