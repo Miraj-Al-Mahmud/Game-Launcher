@@ -10,7 +10,7 @@
 
 #define nameLength 30
 #define userLimit 50
-#define minimum_length 4
+#define minimum_length 1
 char names[userLimit][nameLength]; // array of all names
 char IDS[userLimit][nameLength]; // final ids
 char userPassword[nameLength];

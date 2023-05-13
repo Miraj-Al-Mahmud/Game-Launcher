@@ -109,7 +109,7 @@ int validPass(char userInput[])
 
 }
 
-void log_in() // login screen
+void log_in(int trigger) // login screen
 {
     system("MODE 95,18");
     c;nl;nl;nl;space;
@@ -118,8 +118,23 @@ void log_in() // login screen
     scanf("%s",userInput);
     nl;
     int flag = validID(userInput);
-    if (flag==1) return fileManager(userInput);
-    else {strcenter("Not found"); printf("%s\n",IDS[0]);system("pause");log_in();}
+    if (flag==1) // match found
+    {
+        if (trigger==1)
+        {
+            strcenter("Account already exists !!!");
+            log_in(1);
+        }
+        else fileManager(userInput);
+    }
+    else
+    {
+        if(trigger==1)
+        {
+            registration(userInput);
+        }
+        else {strcenter("Not found"); printf("%s\n",IDS[0]);system("pause");log_in(0);}
+    }
 
 }
 
@@ -137,7 +152,7 @@ void files_directory(void) // extract the ids from the created files
             //printf("%s\n", dir->d_name);
             char temp[nameLength];
             int start = 0;
-            if (strlen(dir->d_name) > 9)
+            if (strlen(dir->d_name) > minimum_length)
             {
                 while(dir->d_name[start]!='.') // exttrat the ids till '.txt'
                 {
@@ -154,7 +169,7 @@ void files_directory(void) // extract the ids from the created files
     int tempArray = 0;
     for(int i=0; i<=userLimit; i++)
     {
-        if(strlen(names[i])>=8)
+        if(strlen(names[i])>=minimum_length)
         {
             char cleaner_array[nameLength];
             for(int k=0; k<nameLength; k++)
@@ -173,47 +188,42 @@ void files_directory(void) // extract the ids from the created files
     
 }
 
-
+/*
 int same(char a[]) // check if the username already exists
 {
-    for(int i=0; i<=userLimit; i++)
+    leaderboard();
+    int flag = 0;
+    for(int i=0; i<=total_registered_users; i++)
     {
         if(strcmp(a,IDS[i])==0)
         {
             // matched
             p("Account already exists !!!");
-            return 1;
+            flag = 1;
+            break;
         }
+        printf("%s\n", world_credentials[i][0]);
     }
-    return 0;
+    return flag;
 }
+*/
 
 
 
-void registration() // user registation screen
+void registration(char userInput[]) // user registation screen
 {
-    nl;nl;nl;space;
-    p("USER REGISTRATION");
-    char credentials[3][20];
-    nl;
-    p("Enter your ID >>> ");
-    scanf("%s",credentials[0]);
-
-    // create for already exists !!!
-    int res = same(credentials[0]); // send it to the function
-    if (res==1) registration();
-    else p("Account Available");
-
+    c;
+    char tempPass[nameLength];
     p("Enter password [ At least 8 characters long ] >>> ");
-    scanf("%s",credentials[1]);
+    scanf("%s",tempPass);
 
     char u[] = "users/";
     char t[] = ".txt";
-    strcat(u,credentials[0]);
+    strcat(u,userInput);
     strcat(u,t); // ready for creating by this name
 
     FILE *regi = fopen(u,"w");
-    fprintf(regi,"%s\n0\n0\n0\n0\n10\n0\n0\n0\n0\n10",credentials[1]); // default data values later can be changed
+    fprintf(regi,"%s\n0\n0\n0\n0\n10\n0\n0\n0\n0\n10",tempPass); // default data values later can be changed
     fclose(regi);
     nl;
     p("Account created successfully !!!");

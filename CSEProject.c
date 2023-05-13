@@ -36,7 +36,7 @@ int main(void)
     nl;
     files_directory();  // retrieve the credentials
 	int user = login();
-	(user == 0) ? log_in() : registration();
+	(user == 0) ? log_in(0) : log_in(1);
     
     
     int master_flag = 0;
