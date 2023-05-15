@@ -22,17 +22,23 @@ void screenResolution(int col, int r)
     system(str1);
 }
 
+void animations(int key)
+{
+    if(key==1)
+    {
+        //screenResolution(100,45); // column - row
+        system("MODE 90,45");
+        nl;
+        logo(); // the gamepad logo
+        title(); // name of the project
+        credits(); // my damn name
+    }
+}
 
 int main(void)
 {
-    
+    animations(0);
     c;
-    //screenResolution(100,45); // column - row
-    system("MODE 90,45");
-    nl;
-    logo(); // the gamepad logo
-    title(); // name of the project
-    credits(); // my damn name
     nl;
     files_directory();  // retrieve the credentials
 	int user = login();
@@ -80,8 +86,7 @@ int main(void)
 
     }
 
-    
-     
+
 
  
 

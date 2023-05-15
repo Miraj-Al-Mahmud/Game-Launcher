@@ -387,6 +387,7 @@ int welcome_screen_1()
     
 }
 
+/*
 
 
 void add_all(char fname[], int counter) // attach the usernames with the files
@@ -397,10 +398,20 @@ void add_all(char fname[], int counter) // attach the usernames with the files
     strcpy(world[counter],file_name_final);
 }
 
+*/
 
-
-void leaderboard()  // only arrange the data 
+void leaderboard(int played)  // only arrange the data 
 {
+    int e = 2;
+    if (played == 2) e+=5; 
+    for (int i = 0; i < total_registered_users; ++i)
+    {
+        for(int j=e; j<=e+5; j++) printf("%s\t", version2[i][j]);
+        nl;
+    }
+    
+    hold;
+    /*
     for(int i=0; i <= total_registered_users; i++) add_all(IDS[i],i);          
     for (int i = 0; i < total_registered_users; ++i)
     {
@@ -425,7 +436,7 @@ void leaderboard()  // only arrange the data
         for (int j = 0; j < 10; ++j)  printf("%s ->", world_credentials[i][j]);
         nl;
     }
-    */
+    
     for (int i = 0; i < total_registered_users; ++i) // convert to digits
     {
         for (int j = 1; j < 11; ++j)
@@ -435,6 +446,7 @@ void leaderboard()  // only arrange the data
         }
 
     }
+    
     /*
     for (int i = 0; i < total_registered_users; ++i) // display all the infos
     {
@@ -457,4 +469,4 @@ void main_game_controller(int wheel) // driver code
 }
 
 
-void hall_of_fame(int played) { leaderboard(); assembler(played); }
+void hall_of_fame(int played) { leaderboard(played); /*assembler(played);*/ }

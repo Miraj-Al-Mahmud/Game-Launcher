@@ -8,7 +8,7 @@
 #include <string.h>
 #include <ctype.h>
 
-#define nameLength 30
+#define nameLength 100
 #define userLimit 50
 #define minimum_length 1
 char names[userLimit][nameLength]; // array of all names
@@ -19,11 +19,13 @@ char identity[nameLength]; // userName
 char world[userLimit][nameLength]; // all the registered filenames
 char world_credentials[userLimit][11][nameLength]; // 5 for each game
 int world_credentials_converted[userLimit][11]; // 5 for each game
+char version2[userLimit][12][nameLength];
 
 #define row 35
 #define column 100
 #define true 1
 #define false 0
+#define hold system("pause")
  
 // definitions and color codes
 #define nl printf("\n")

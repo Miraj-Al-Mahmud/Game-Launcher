@@ -3,8 +3,9 @@
 #include "essentials.h"
 static char temp[20] = "";
 int total_registered_users = 0;
+int found_index = -1;
 
-
+/*
 void last_check() // remove the garbage value one last time
 {
     for(int i=0;i<=total_registered_users;i++)
@@ -42,18 +43,21 @@ void fileManager(char userInput[]) // process the users pass, scores of games //
     fclose(fptr);
 
 }
+*/
 
 int validID(char userInput[]) // search in the database
 {
-    last_check();
+    //last_check();
     int flag = 0;
     for(int j=0; j<=total_registered_users; j++)
     {
         if(flag == 0)
         {
-            if(strcmp(IDS[j],userInput) == 0 && strlen(IDS[j]) == strlen(userInput))
+            if(strcmp(version2[j][0],userInput) == 0 && strlen(version2[j][0]) == strlen(userInput))
             {
                 flag = 1;
+                strcpy(scores[0],version2[j][1]);
+                found_index = j;
                 break;
             }
         }
@@ -95,7 +99,7 @@ int validPass(char userInput[])
     // scanf("%s",userPass); // incognito
 
     int length = strlen(scores[0]);
-    scores[0][length-1] = '\0';
+    //scores[0][length-1] = '\0';
     if(strcmp(userPass,scores[0])==0)
         {
             nl;
@@ -125,7 +129,7 @@ void log_in(int trigger) // login screen
             strcenter("Account already exists !!!");
             log_in(1);
         }
-        else fileManager(userInput);
+        else validPass(userInput);
     }
     else
     {
@@ -133,13 +137,14 @@ void log_in(int trigger) // login screen
         {
             registration(userInput);
         }
-        else {strcenter("Not found"); printf("%s\n",IDS[0]);system("pause");log_in(0);}
+        else {strcenter("Not found"); printf("%s\n%s\n%s\n",IDS[0],IDS[1],IDS[2]);system("pause");log_in(0);}
     }
 
 }
 
 void files_directory(void) // extract the ids from the created files
 {
+    /*
     #include <dirent.h>
     int nameID = 0;
     DIR *d;
@@ -152,7 +157,7 @@ void files_directory(void) // extract the ids from the created files
             //printf("%s\n", dir->d_name);
             char temp[nameLength];
             int start = 0;
-            if (strlen(dir->d_name) > minimum_length)
+            if (strlen(dir->d_name) >= minimum_length)
             {
                 while(dir->d_name[start]!='.') // exttrat the ids till '.txt'
                 {
@@ -161,11 +166,44 @@ void files_directory(void) // extract the ids from the created files
                 }
             }
             strcpy(names[nameID],temp);
+            printf("%s\n",names[nameID]);
+            strcpy(names[nameID+1],"");
             nameID++;
         }
         closedir(d);
     }
+    */
 
+    // new iteration - only store the creadentials in one file
+    FILE *fptr = fopen("docs.txt", "r");
+    char pass[nameLength];
+    int i = 0;
+    while (fgets(pass, nameLength, fptr) != NULL)
+    {
+        // seperate the commas
+        char *pt;
+        pt = strtok (pass,",");
+        int j=0;
+        while (pt != NULL) {
+            if(isalpha(pt[0]) || isdigit(pt[0])) strcpy(version2[i][j],pt); // copy the data to new array, this is the complete array
+            //printf("%s\n", version2[i][j]);
+            pt = strtok (NULL, ",");
+            j++;
+        }
+        
+        i++;
+        total_registered_users++;
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    /*
     int tempArray = 0;
     for(int i=0; i<=userLimit; i++)
     {
@@ -184,7 +222,8 @@ void files_directory(void) // extract the ids from the created files
     }
     total_registered_users = tempArray;
     //printf("%d",total_registered_users);
-    //system("pause");
+    system("pause");
+    */
     
 }
 
@@ -213,20 +252,21 @@ int same(char a[]) // check if the username already exists
 void registration(char userInput[]) // user registation screen
 {
     c;
-    char tempPass[nameLength];
+    char tempPass[2][nameLength];
     p("Enter password [ At least 8 characters long ] >>> ");
-    scanf("%s",tempPass);
+    scanf("%s",tempPass[0]);
+    strcpy(tempPass[1],tempPass[0]);
 
-    char u[] = "users/";
-    char t[] = ".txt";
-    strcat(u,userInput);
-    strcat(u,t); // ready for creating by this name
 
-    FILE *regi = fopen(u,"w");
-    fprintf(regi,"%s\n0\n0\n0\n0\n10\n0\n0\n0\n0\n10",tempPass); // default data values later can be changed
+    FILE *regi = fopen("docs.txt","a");
+    fprintf(regi,"%s,%s,0,0,0,0,10,0,0,0,0,10\n",userInput,tempPass[1]); // default data values later can be changed
     fclose(regi);
     nl;
-    p("Account created successfully !!!");
+    strcenter("Account created successfully !!!");
+    space; hold;
+    fflush(stdout);
+    files_directory();
+    log_in(0); // 0 for log in 1 for registration
 }
 
 
