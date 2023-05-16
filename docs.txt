@@ -1,5 +1,4 @@
-maverick,maverick,0,0,0,0,10,0,0,0,0,1
-iammaverick,iammaverick,0,0,0,0,10,0,0,0,0,1
-new,new,0,0,0,0,10,0,0,0,0,1
-miraj,miraj,1,1,0,100,9,1,0,1,0,
-fuck,fuck,0,0,0,0,10,1,1,0,100,5
+maverick,maverick,0,0,0,0,10,0,0,0,0,10
+new,new,0,0,0,0,10,0,0,0,0,10
+iammaverick,iammaverick,2,2,0,100,9,0,0,0,0,10
+miraj,miraj,3,3,0,100,3,2,2,0,100,3

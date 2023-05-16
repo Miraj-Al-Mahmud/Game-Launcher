@@ -34,7 +34,11 @@ void gather_previous_scores() // gather scores from the file
 
 void ass()
 {
-	for (int i = 0; i < total_registered_users; ++i) version2[i][11][strlen(version2[i][11])-1] = '\0';
+	if (wheel==1)
+	{
+		for (int i = 0; i < total_registered_users; ++i) version2[i][11][strlen(version2[i][11])-1] = '\0';
+	}
+	
 
 	//system("MODE 200,200");
 	for (int i = 0; i < total_registered_users; ++i)

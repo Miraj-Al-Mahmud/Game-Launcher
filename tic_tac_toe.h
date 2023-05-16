@@ -402,14 +402,25 @@ void add_all(char fname[], int counter) // attach the usernames with the files
 
 void leaderboard(int played)  // only arrange the data 
 {
+    // 0 1
+    // 2 3 4 5  6
+    // 7 8 9 10 11
+    printf("\t\t\tNAME\t\tPLAYED\tWIN\tLOSS\t%%\tMOVES");
+    nl;
     int e = 2;
     if (played == 2) e+=5; 
     for (int i = 0; i < total_registered_users; ++i)
     {
-        for(int j=e; j<=e+5; j++) printf("%s\t", version2[i][j]);
+        p("\t\t\t");
+        if(strlen(version2[i][0])>5) printf("%s\t", version2[i][0]);
+        else printf("%s\t\t", version2[i][0]);
+        if (i!=found_index) for(int j=e; j<=e+4; j++) printf("%s\t", version2[i][j]);
+        else for(int j=e; j<=e+4; j++) printf("%d\t", tempArray[j-2]);
         nl;
     }
     
+    nl;nl;nl;
+    space;
     hold;
     /*
     for(int i=0; i <= total_registered_users; i++) add_all(IDS[i],i);          

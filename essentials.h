@@ -21,6 +21,8 @@ char world_credentials[userLimit][11][nameLength]; // 5 for each game
 int world_credentials_converted[userLimit][11]; // 5 for each game
 char version2[userLimit][12][nameLength];
 
+
+
 #define row 35
 #define column 100
 #define true 1

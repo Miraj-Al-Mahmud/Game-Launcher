@@ -11,6 +11,7 @@
 // capital = 65 - 90
 
 
+
 void screenResolution(int col, int r)
 {
     char row2[] = {r, '\0'};
@@ -51,7 +52,7 @@ int main(void)
     {
         fflush(stdout);
         int cho = controller();
-        int wheel = 0; // how many times played the game
+        // attendance for another variable for game palyed
         if (cho==1)
         {
             // or tic tac toe
@@ -65,6 +66,7 @@ int main(void)
                 nl;nl;nl;
                 int v = liked();
                 if (v==1) {c;break;}
+            
             }
             //main_game_controller();
         }
@@ -81,6 +83,7 @@ int main(void)
                 int v = liked();
                 if (v==1) {c;break;}
             }
+     
         }
         else if (cho==3) {break;}
 

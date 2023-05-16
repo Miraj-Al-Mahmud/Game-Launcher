@@ -4,6 +4,7 @@
 static char temp[20] = "";
 int total_registered_users = 0;
 int found_index = -1;
+static int wheel = 0; // how many times played the game
 
 /*
 void last_check() // remove the garbage value one last time
