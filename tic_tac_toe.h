@@ -2,11 +2,11 @@
 
 #include "essentials.h"
 
-int computer = false;
-char square[10] = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
-char backup[10] = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
+int computer = false; // toggle for A.I.
+char square[10] = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' }; // main board
+char backup[10] = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' }; // backup
 
-int ai_rng()
+int ai_rng() // generate moves for A.I.
 {
     srand(time(NULL));
     int x = (rand() % 9) + 1;  // + 1 for ignoring the 0
@@ -14,16 +14,15 @@ int ai_rng()
     int i = x;
     while (i > 0)
     {
-        if(square[i]=='X' || square[i]=='O') i--;
+        if(square[i]=='X' || square[i]=='O') i--; // from the generated number to backwards
         else {flag = true; break;}
     }
     if (flag = true) return i;
-    
     if (flag == false)
     {
         while(true)
         {
-            if(square[i]=='X' || square[i]=='O') x++;
+            if(square[i]=='X' || square[i]=='O') x++; // if not found then forwards
             else {flag = true; break;}
         } 
     }
@@ -31,24 +30,22 @@ int ai_rng()
     return x;
 }
 
-void add_points(int start, int player, int i, int chances)
+void add_points(int start, int player, int i, int chances) // not sure if it's needed
 {
     tempArray[0]++;
     if (player==2 && i==1) tempArray[1]++;
     else tempArray[2]++;
     tempArray[3] = (tempArray[1]*100) / tempArray[0];
-    if (chances < tempArray[4]) tempArray[4] = chances;
-    
-    //for(int j=0;j<10;j++) printf("%d\n", tempArray[j]);   
+    if (chances < tempArray[4]) tempArray[4] = chances; 
 }
 
 
 
-int game1(int wheel)
+int game1(int wheel) // wheel for rotations of the game
 {
-    for(int i = 0; i < 10; i++) square[i] = backup[i];
+    for(int i = 0; i < 10; i++) square[i] = backup[i]; // copy the backup after deforming
     int counter = 0; // number of moves
-    int player = 1, i, choice;
+    int player = 1, i, choice; // player 1 is the user himself
     char mark;
     do
     {
@@ -58,20 +55,14 @@ int game1(int wheel)
         else { player = 2; }
         nl;nl;nl;
         
-        if (computer==true && player==2)
-        {
-            choice = ai_rng();
-        }
+        if (computer==true && player==2) choice = ai_rng();
         else
         {
             printf("Player %d = \t   ", player);
             scanf("%d", &choice);
         }
-
         if (player == 1) {mark='X';}
         else {mark='O';}
-
-
         if (choice == 1 && square[1] == '1') square[1] = mark;
         else if (choice == 2 && square[2] == '2') square[2] = mark;
         else if (choice == 3 && square[3] == '3') square[3] = mark;
@@ -81,7 +72,7 @@ int game1(int wheel)
         else if (choice == 7 && square[7] == '7') square[7] = mark;
         else if (choice == 8 && square[8] == '8') square[8] = mark;
         else if (choice == 9 && square[9] == '9') square[9] = mark;
-        else
+        else // for any wrong move
         {
             c;
             system("color 4F");
@@ -116,11 +107,6 @@ int game1(int wheel)
         printf("\n\t\t\t\t==========================================\n\n");
     }
     
-    // choice is the moves
-    // player is the identity
-    //printf("Total number of moves = %d\n", choice);
-    //printf("Player %d wins\n", player);
-    
     add_points(0, player, i, choice);
     ass();
     
@@ -146,9 +132,6 @@ int checkwin() // winning or not ??
         return 0;
     else return  - 1;
 }
-
-
-
 
 void board(int counter)
 {
@@ -215,20 +198,6 @@ void smiley(player){
 }
 
 
-
-
-
-
-//  1f --- blue
-/*
-    4f ---- red
-    6f ==== violet
-    60 ==== draw
-
-
-*/
-
-
 struct collector
 {
     char player_name[nameLength];
@@ -244,12 +213,6 @@ struct collector
     int g25;
 };
 
-int present(int array[], int number) // check for availability
-{
-    int flag = false;
-    for (int i = 0; i < total_registered_users; ++i) {   if(array[i] == number) {flag = true; break;}  }
-    return flag;
-}
 
 
 void assembler(int played)
@@ -293,76 +256,19 @@ void assembler(int played)
             array_final[i].player_name, array_final[i].g21,array_final[i].g22,array_final[i].g23,array_final[i].g24,array_final[i].g25);
         }
     }
-    /*
-    // find the greatest
-    int expected = 0;
-    int ice_breaker = false;
-    char winner[nameLength] = "";
     
-    int index_array[total_registered_users];
-    int sorted_array[total_registered_users];
-    char winner_array_name[total_registered_users][nameLength];
-    int winner_array_score[total_registered_users];
-    int positions[total_registered_users];
-    
-    
-    // gather only the name and percentage to the secondary array
-    for (int i = 0; i < total_registered_users; ++i)
-    {
-        strcpy(winner_array_name[i], array_final[i].player_name);
-        winner_array_score[i] = array_final[i].g14;
-    }
-    
-    
-    
-    
-
-    
-    int index = 0;    
-    int temp_high = 0;
-    int j = 0;
-    while (j < total_registered_users)
-    {
-        for (int i = 0; i < total_registered_users; ++i)
-        {
-            int pr = present(sorted_array, winner_array_score[i]);
-            //printf("%d\n", pr);
-            if (temp_high < winner_array_score && pr == 0) {temp_high = winner_array_score[i]; index = i;}    
-        }
-        sorted_array[j] = temp_high;
-        index_array[j] = index;
-        j++;
-    }
-    
-    // display
-    for (int i = 0; i < total_registered_users; ++i) printf("%s %d\n", winner_array_name[i],winner_array_score[i]);
-    
-    
-    // finall show the results
-    for (int i = 0; i < total_registered_users; ++i)
-    {
-        for (int j = 0; j < total_registered_users; ++j)
-        {
-            if (strcmp(array_final[j].player_name,winner_array_name[index_array[i]])==0)
-            {
-                printf("%s\t%d\t%d\t%d\t%d\t%d\n",array_final[j].player_name,array_final[j].g11,array_final[j].g12,array_final[j].g13,array_final[j].g14,array_final[j].g15);
-                break;
-            }
-            //else printf("Not found\n");
-        }
-    }
-    */
-
 }
 
 
 
 
 
-int welcome_screen_1()
+int welcome_screen_1() // A.I. or Human
 {
     int handler = 0;
     c;
+    nl;nl;
+    strcenter("= S E L E C T\tM O D E =");
     nl;nl;nl;
     strcenter("1. Play against A.I.");
     strcenter("2. Play against another user");
@@ -401,7 +307,10 @@ void add_all(char fname[], int counter) // attach the usernames with the files
 */
 
 void leaderboard(int played)  // only arrange the data 
-{
+{   
+    system("MODE 105,22");
+    nl;nl;nl;
+    // Name - Password - Win - Loss - % - Moves
     // 0 1
     // 2 3 4 5  6
     // 7 8 9 10 11
@@ -415,58 +324,92 @@ void leaderboard(int played)  // only arrange the data
         if(strlen(version2[i][0])>5) printf("%s\t", version2[i][0]);
         else printf("%s\t\t", version2[i][0]);
         if (i!=found_index) for(int j=e; j<=e+4; j++) printf("%s\t", version2[i][j]);
-        else for(int j=e; j<=e+4; j++) printf("%d\t", tempArray[j-2]);
+        else
+        {
+            for(int j=e; j<=e+4; j++) printf("%d\t", tempArray[j-2]);
+            p("<<< YOU <<<");
+        }
         nl;
     }
     
     nl;nl;nl;
     space;
     hold;
-    /*
-    for(int i=0; i <= total_registered_users; i++) add_all(IDS[i],i);          
-    for (int i = 0; i < total_registered_users; ++i)
-    {
-        FILE *fptr = fopen(world[i],"r");
-        
-        char pass[50];
-        int j = 0;
-        while (fgets(pass, 50, fptr) != NULL)
-        {
-            strcpy(world_credentials[i][j],pass);
-            j++;
-        }
-    }
-    for (int i = 0; i < total_registered_users; ++i)
-    {
-        for (int j = 0; j < 11; ++j) // make the last new line to null chanracter
-            world_credentials[i][j][strlen(world_credentials[i][j])-1]='\0';
-    }
-    /*
-    for (int i = 0; i < total_registered_users; ++i)
-    {
-        for (int j = 0; j < 10; ++j)  printf("%s ->", world_credentials[i][j]);
-        nl;
-    }
     
-    for (int i = 0; i < total_registered_users; ++i) // convert to digits
-    {
-        for (int j = 1; j < 11; ++j)
-        {
-            int con = atoi(world_credentials[i][j]);
-            world_credentials_converted[i][j] = con;
-        }
-
-    }
-    
-    /*
-    for (int i = 0; i < total_registered_users; ++i) // display all the infos
-    {
-        printf("%s", IDS[i]);
-        for (int j = 1; j < 11; ++j)  printf("\t%d", world_credentials_converted[i][j]);
-        nl;
-    }
-    */   
 }
+
+int present(int array[], int number) // check for availability
+{
+    int flag = false;
+    for (int i = 0; i < total_registered_users; ++i) {   if(array[i] == number) {flag = true; break;}  }
+    return flag;
+}
+
+
+
+void sorted_leaderboard(int played)
+{
+    int num[total_registered_users];
+    char nam[total_registered_users][nameLength];
+    
+    for (int i = 0; i < total_registered_users; ++i)
+    {
+        strcpy(nam[i],version2[i][0]); // one to one
+        int t = atoi(version2[i][5]);
+        num[i]=t; 
+    }
+    // copy the tempArray only one
+    num[total_registered_users] = tempArray[3];
+    strcpy(nam[total_registered_users],identity);
+    
+    //int n = sizeof(nam) / sizeof(nam[0]);
+
+    //sort_names_and_values(nam, num, total_registered_users);
+    
+    for (int i = 0; i < total_registered_users; ++i) printf("%s %d\n", nam[i], num[i]);
+    /*
+    char distribution[total_registered_users][nameLength];
+    
+    // copy all of the names and percentages only
+    
+    for (int i = 0; i < total_registered_users; ++i) printf("%s %d\n", nam[i], num[i]);
+
+
+    int ban[total_registered_users];
+    // make them zeros
+    int highest = -1, ind = -1;
+    char champion[nameLength] = "";
+    //strcpy(champion, nam[0]); // just to start off
+    //highest = num[0]; // and the second one
+    int k = 0; // for iterating through the for loop another last time
+    while (k < total_registered_users)
+    {
+        int i;
+        for (i = 0; i < total_registered_users; ++i)
+        {
+            if(num[i]>=highest && strcmp(champion,nam[i])==1) // nums and names do not match
+            {
+                highest = num[i];
+                //free(champion);
+                strcpy(champion, nam[i]);
+                printf("%s %d\n", champion, highest);
+                ind = i;
+            }
+            // at last get the name and num of the champion and change the values of the higest to the lowest
+            
+        }
+        //free(distribution[k]);
+        strcpy(distribution[k],champion);
+        printf("%s\n", distribution[k]);
+        num[ind]=-1*k+1;
+        k++;
+    }
+    strcenter("FINAL");
+    for (int i = 0; i < total_registered_users; ++i) printf("%s\n", distribution[i]);
+    */
+    hold;
+}
+
 
 void main_game_controller(int wheel) // driver code
 {

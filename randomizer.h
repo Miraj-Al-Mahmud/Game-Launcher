@@ -1,25 +1,27 @@
 
+// Random Number Guessing Game
+
 #include "essentials.h"
 #define upper_limit 10
 
-int main_number = -1;
+int main_number = -1; // keep the random number here
 static int tempArray[10] = {0}; // for storing this game's specific scores 1 - 10
 
-void rng()
+void rng() // RANDOM NUMBER GENERATOR
 {
 	srand(time(NULL));
 	int x = (rand() % upper_limit) + 1;  // + 1 for ignoring the 0
 	main_number = x;
 }
 
-void greetings(int chances)
+void greetings(int chances) // Moves for speech
 {
 	if(chances >= 3) strcenter("Try Again !!!");
 	else if (chances == 2) strcenter("Last chance ... GOOD LUCK!!!"); 
 	else if (chances == 1) strcenter("Better Luck next time!!!");
 }
 
-void gather_previous_scores() // gather scores from the file
+void gather_previous_scores() // gather scores from another array to this array
 { // atoi -> string to number
 	for(int i=2; i<=11; i++)
 	{
@@ -34,44 +36,14 @@ void gather_previous_scores() // gather scores from the file
 
 void ass()
 {
-	if (wheel==1)
+	if (wheel==1) // if only for first time remove the last '\n' character
 	{
 		for (int i = 0; i < total_registered_users; ++i) version2[i][11][strlen(version2[i][11])-1] = '\0';
 	}
-	
-
-	//system("MODE 200,200");
-	for (int i = 0; i < total_registered_users; ++i)
-	{
-		for(int j=0; j<12; j++)	printf("%s---", version2[i][j]);
-		nl;
-	}
-	
-	
-	
-	
-	//strcpy(xxx[0],version2[0][0]);
-	
-	
-	
-	
-	/*
-	for (int i = 0; i <= 9; ++i)
-	{
-		char tes[][nameLength] = {tempArray[i],'\0'};// convert to string
-		strcpy(version2[found_index][i+2], tes);
-		//strcpy(version3[0][i], tes);
-		printf("%s ",tes);
-	}
-	
-	
-	
 		
-	*/
-	
 		
-    FILE *sc = fopen("docs.txt","w");
-    for(int i=0; i<total_registered_users; i++)
+    FILE *sc = fopen("docs.txt","w"); // all the credentials
+    for(int i=0; i<total_registered_users; i++) // dump all the credentials except the current users
     {
     	if (i!=found_index)
     	{
@@ -84,11 +56,10 @@ void ass()
     	}
     	
     }
-    //fclose(sc);
-    //FILE *sc = fopen("docs.txt","a");
+
     fprintf(sc, "%s,", version2[found_index][0]); // username
     fprintf(sc, "%s,", version2[found_index][1]); // password
-    for (int i = 0; i <= 9; ++i)
+    for (int i = 0; i <= 9; ++i) // dump th current user from tempArray as digits
     {
     	if(i!=9) fprintf(sc,"%d,",tempArray[i]);
     	else fprintf(sc,"%d\n",tempArray[i]);
@@ -109,7 +80,7 @@ void stats(int start) // user statistics
 }
 
 
-int liked()
+int liked() // play again ???
 {
 	int ver = 0;
 	strcenter("Play again ??? 'Y' / 'N' >>> ");
@@ -123,9 +94,9 @@ int liked()
 
 
 
-void game2(int wheel)
+void game2(int wheel) // main game
 {
-	system("MODE 110,30");
+	system("MODE 110,30"); // initialize the screen
 	int flag = 0;
 	rng();
 	if (wheel==1) gather_previous_scores(); // only for the first time
@@ -166,15 +137,8 @@ void game2(int wheel)
 	else tempArray[7]++; // for losing
 	tempArray[8] = (tempArray[6]*100) / tempArray[5];
 	if(6-chances<tempArray[9]) {tempArray[9] = 6-chances;} // no of moves personal best
-	
-	//for(int i=5; i<10; i++) printf("%d",tempArray[i]);
-	
-
-	
-	
+		
 	ass();
-	
-	
 	
 }
 

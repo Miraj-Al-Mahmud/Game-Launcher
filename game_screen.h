@@ -1,10 +1,7 @@
 
-#include "essentials.h"
+// Actual IN GAME screen
 
-// options are ->
-// Tic - Tac - Toe
-// Number Guessing Game
-// Exit
+#include "essentials.h"
 
 static int a = 0;
 
@@ -12,11 +9,11 @@ void gameTitle()
 {
 	system("MODE 110,20");
 	nl;nl;nl;
-	strcenter("=============== CHOOSE YOUR GAME ===============");
+	strcenter("= C H O O S E    Y O U R    G A M E =");
 	nl;nl;nl;
 }
 
-void first_screen() // default
+void first_screen() // default & first
 {
 	gameTitle();
 	cyan;	
@@ -27,7 +24,7 @@ void first_screen() // default
 	strcenter("You selected TIC TAC TOE. Press ENTER to continue");	
 }
 
-void second_screen() // default
+void second_screen() // second
 {
 	gameTitle();
 	green;	
@@ -39,7 +36,7 @@ void second_screen() // default
 }
 
 
-void third_screen() // default
+void third_screen() // third
 {
 	gameTitle();
 	red;
@@ -51,8 +48,7 @@ void third_screen() // default
 }
 
 
-
-int controller()
+int controller() // navigate by user input in real time
 {
 	char inp;
 	first_screen();
@@ -64,7 +60,6 @@ int controller()
 		else if (inp=='3') {a = 3; c; third_screen();}
 		else if (inp=='\n' || inp=='\r') {nl; strcenter("Please wait ..."); s(2); break;}
 	}
-	//printf("%c\n",inp); // did not understand
 	if (a==1) return 1;
 	else if (a==2) return 2;
 	else if (a==3) return 3;

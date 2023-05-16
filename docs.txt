@@ -1,4 +1,6 @@
-maverick,maverick,0,0,0,0,10,0,0,0,0,10
-new,new,0,0,0,0,10,0,0,0,0,10
-iammaverick,iammaverick,2,2,0,100,9,0,0,0,0,10
-miraj,miraj,3,3,0,100,3,2,2,0,100,3
+mxe,mxe,2,2,0,100,9,1,1,0,100,1
+maverick,maverick,2,2,0,100,9,3,3,0,100,2
+iammaverick,iammaverick,1,1,0,100,3,1,1,0,100,4
+new,new,4,4,0,100,8,1,0,1,0,6
+miraj,miraj,4,4,0,100,9,4,3,1,75,3
+superman,superman,0,0,0,0,10,3,1,2,33,1

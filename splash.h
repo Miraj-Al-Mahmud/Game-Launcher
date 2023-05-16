@@ -1,7 +1,7 @@
 
+// Initial screen for some fancy animations
 
 #include "essentials.h"
-
 
 void title(void)
 {
@@ -13,7 +13,7 @@ void title(void)
 
 }
 
-void strcenter(char str[])
+void strcenter(char str[]) //  custom function for centering the string
 {
     // get the column size
     // get the printable string size
@@ -26,7 +26,11 @@ void strcenter(char str[])
     puts(str);
 }
 
-void scatter() {yellow_red; for (int i = 0; i < 39999; ++i) printf("%d", i);c;}
+void scatter() // for number cattering screen
+{
+    yellow_red; for (int i = 0; i < 19999; ++i) printf("%d", i);c;
+    green_red; for (int i = 0; i < 19999; ++i) printf("%d", i);c;
+}
 
 void logo(void)
 {
@@ -69,8 +73,8 @@ void credits(void)
     s(2); white_blue;
     printf("\t\t\t\t     MIRAJ AL MAHMUD KHAN");
     s(1); white_red;
-    s(1); green_red;
-    s(1); green_pink;
+    s(1); yellow;
+    s(1); cyan;
 }
 
 // login or registration
@@ -86,7 +90,7 @@ int login(void)
 		strcenter("L");
 		nl; printf("\t\t\t\t\tYou pressed 'L'");
 		s(2);
-		nl; printf("\t\t\tRedirecting to the LOG IN screen");
+		nl;nl;nl; printf("\t\t\tRedirecting to the LOG IN screen");
 		dots();
 		return 0;
 	}
@@ -96,7 +100,7 @@ int login(void)
 		strcenter("R");
 		nl; printf("\t\t\t\t\tYou pressed 'R'");
 		s(2);
-		nl; printf("\t\t\tRedirecting to the REGISTRATION screen");
+		nl;nl;nl; printf("\t\t\tRedirecting to the REGISTRATION screen");
 		dots();
 		return 1;
 	}
@@ -113,7 +117,7 @@ int login(void)
 // display dots animation
 void dots(void) { for (int i = 0; i < 5; ++i) { s(1); printf(" .");} }
 
-void welcome()
+void welcome() // get the username and print it one by one character
 {
     c; s(2);
     nl;nl;nl;nl;nl;nl;nl;
@@ -125,7 +129,7 @@ void welcome()
     p(" O");s(1);white;
     p(" M");s(1);cyan;
     p(" E");s(1);green;
-
+    yellow_red;
     // scores[0] is the name
     int i = 0; p("     ");
     while(identity[i]!='\0')
@@ -134,6 +138,10 @@ void welcome()
         s(.25);
         i++;
     }
+    
+    s(2);
 }
+
+
 
 

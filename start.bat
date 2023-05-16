@@ -1,2 +1,2 @@
 @echo off
-gcc CSEProject.c && a.exe
+start a.exe
